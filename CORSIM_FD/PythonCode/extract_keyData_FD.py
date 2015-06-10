@@ -5,13 +5,18 @@
 
 from numpy import *
 from copy import deepcopy
+import sys
+import os
+
 
 if __name__=='__main__':
 
+
+
         ## the directory where the output text files from CORSIM are located
-        loadDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM_FD/CORSIMOutPutTextFile/'
+        loadDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/CORSIMOutPutTextFile2/'
         ## the directory where the output from this function will be saved at
-        saveDirectory = '/Users/Ren/Dropbox//SourceCode/CORSIM_FD/ExtractedKeyData/'
+        saveDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/ExtractedKeyData/'
 
 
         ## the list of files that will be extracted

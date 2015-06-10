@@ -5,10 +5,13 @@ from numpy import *
 from random import choice
 from copy import deepcopy
 import timeit
+import sys
+import os
+
 
 
 flow = 6000
-Density = load('/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/Measurements/meaDensityL3B1F'+str(flow)+'S65R50.npy')
+Density = load(os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM filter factor/Measurements/meaDensityL3B1F'+str(flow)+'S65R50.npy')
 VL = 14.0
 DL = 6.0
 Occupancy = Density*(VL+DL)/5280.0/3

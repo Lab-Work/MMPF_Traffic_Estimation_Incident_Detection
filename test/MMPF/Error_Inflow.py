@@ -4,15 +4,15 @@ from random import choice
 from copy import deepcopy
 import sys
 import time
-
+import os
 
 if __name__=='__main__':
 
 
-    directoryLoad = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_inflow/'
-    directoryLoad2 = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/TrueState/'
-    directoryLoad3 = '/Users/Ren/Dropbox/SourceCode/test/EnKF/Result_inflow/'
-    directorySave = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_PR_error/'
+    directoryLoad = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_inflow/'
+    directoryLoad2 = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM filter factor/TrueState/'
+    directoryLoad3 = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/EnKF/Result_inflow/'
+    directorySave = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_PR_error/'
 
     TrueModel = load(directoryLoad+'TrueModel.npy')
 

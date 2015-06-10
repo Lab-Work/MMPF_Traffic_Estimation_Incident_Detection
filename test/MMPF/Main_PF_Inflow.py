@@ -3,10 +3,9 @@ from numpy import *
 from random import choice
 from copy import deepcopy
 import sys
-##sys.path.append('/Users/Ren/Dropbox/SourceCode/FilterFunctions/')
-##sys.path.append('/Users/Ren/Dropbox/SourceCode/TrafficModel/')
-sys.path.append('/Users/Ren/Dropbox/SourceCode/FilterFunctions/')
-sys.path.append('/Users/Ren/Dropbox/SourceCode/TrafficModel/')
+import os
+sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/FilterFunctions/')
+sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/TrafficModel/')
 from traffic_models_lq import *
 from particle_filter_functions import *
 import time
@@ -111,11 +110,9 @@ if __name__=='__main__':
 
 ## Load Measurements and true
     
-##    directoryLoad = '/Users/Ren/Dropbox/SourceCode/Test/Corsim/SourceData/'
-##    directorySave = '/Users/Ren/Dropbox/SourceCode/Test/Corsim/MMPF/Result_occ/'
 
-    directoryLoad = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/'
-    directorySave = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_inflow/'
+    directoryLoad = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM filter factor/'
+    directorySave = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_inflow/'
 
 
     densityTrue = load(directoryLoad+'TrueState/'+'TrueDensityL3B1F'+str(inflow)+'S65R50.npy')

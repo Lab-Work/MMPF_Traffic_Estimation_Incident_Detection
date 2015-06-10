@@ -7,7 +7,8 @@ from numpy import *
 from random import choice
 from random import sample
 from copy import deepcopy
-
+import sys
+import os
 
 def build_veh_trajectory(keyData):
 ## construct the vehicle trajectory dictionary
@@ -80,9 +81,9 @@ def collect_flow_speed_occupancy(vehTrajectory, dataTime, deltaT, simulationTime
 if __name__=='__main__':
 
         ## the directory to load the extracted keyData
-        loadDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM_FD/ExtractedKeyData/'
+        loadDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/ExtractedKeyData/'
         ## the directory to store the processed keyData
-        saveDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM_FD/ProcessedKeyData/'       
+        saveDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/ProcessedKeyData/'       
                 
                 
         fileList = ['L3F7000S65','L3F5000S65','L3F3000S65','L3F7000S45','L3F7000S35','L3F7000S25','L3F7000S15','L3F7000S10','L3F7000S5','L3F7000S1']

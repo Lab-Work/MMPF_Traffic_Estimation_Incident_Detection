@@ -6,14 +6,16 @@ from numpy import *
 from random import choice
 from copy import deepcopy
 import scipy.optimize as optimization
+import sys
+import os
 
 
 if __name__=='__main__':
 
     ## the directory to load the processed keyData
-    loadDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM_FD/ProcessedKeyData/'
+    loadDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/ProcessedKeyData/'
     ## the directory to store the fundamental diagram
-    saveDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM_FD/CalibratedFD/'       
+    saveDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM_FD/CalibratedFD/'       
 
     fileList = ['L3F5000S65','L3F3000S65','L3F7000S45','L3F7000S35','L3F7000S25','L3F7000S15','L3F7000S10','L3F7000S5','L3F7000S1']
     FDCollected = load(loadDirectory + 'L3F7000S65'+'ProcessedkeyData.npy')

@@ -3,6 +3,7 @@ from numpy import *
 from random import choice
 from copy import deepcopy
 import sys
+import os
 import time
 
 
@@ -13,8 +14,8 @@ if __name__=='__main__':
     smootherChoice = [True, False]
     savefigure = True
 
-    directoryLoad = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_all/'
-    directorySave = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_PR_error/'
+    directoryLoad = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_all/'
+    directorySave = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_PR_error/'
 
     TrueDensity = load(directoryLoad+'TrueDensity.npy')
     TrueModel = load(directoryLoad+'TrueModel.npy')
@@ -76,33 +77,4 @@ if __name__=='__main__':
     plt.savefig(directorySave+'FigAllErrorModel.pdf',bbox_inches='tight')
     plt.show()
     plt.hold(False)
-
-
-
-
-
-
-
-##                if PR == 2:
-##                    print 'smoother', smoother
-##                    print sum(abs(estModel - TrueModel))
-
-
-                
-
-
-##            ##########################################################################################################################
-##            ## Load Measurements and true
-##
-##                directoryLoad = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/'
-##                directorySave = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_occ/'
-##
-##
-##                densityTrue = load(directoryLoad+'TrueState/'+'TrueDensityL3B1F6000S65R50.npy')
-##            #    speedTrue = load(directoryLoad+'TrueSpeed.npy')
-##                densityMea = densityTrue
-##                speedMea = load(directoryLoad+'Measurements/'+'meaSpeed'+str(PR)+'R'+str(rand)+'L3B1F6000S65R50.npy')
-##            #    parameterTrue = load(directoryLoad+'TrueParameter.npy')
-
-
 

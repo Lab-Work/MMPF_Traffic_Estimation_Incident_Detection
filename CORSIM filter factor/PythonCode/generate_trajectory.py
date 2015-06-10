@@ -7,6 +7,8 @@ from random import choice
 from random import sample
 from copy import deepcopy
 import matplotlib.animation as animation
+import sys
+import os
 
 
 def build_data_time(keyData):
@@ -23,10 +25,9 @@ def build_data_time(keyData):
 
 if __name__=='__main__':
 
-        ## the directory to load the extracted keyData
-        loadDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/ExtractedKeyData/'
-        ## the directory to store the true state
-        saveDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/TrueState/'       
+        loadDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'/ExtractedKeyData/'
+        ## the directory where the output from this function will be saved at
+        saveDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'/TrueState/'    
 
         fileName = 'L3B1F6000S65R50'
         keyData = load(loadDirectory+fileName+'keyTra.npy')

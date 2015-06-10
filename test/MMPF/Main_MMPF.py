@@ -3,10 +3,9 @@ from numpy import *
 from random import choice
 from copy import deepcopy
 import sys
-##sys.path.append('/Users/Ren/Dropbox/SourceCode/FilterFunctions/')
-##sys.path.append('/Users/Ren/Dropbox/SourceCode/TrafficModel/')
-sys.path.append('/Users/Ren/Dropbox/SourceCode/FilterFunctions/')
-sys.path.append('/Users/Ren/Dropbox/SourceCode/TrafficModel/')
+import os
+sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/FilterFunctions/')
+sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/TrafficModel/')
 from traffic_models_lq import *
 from particle_filter_functions import *
 import time
@@ -113,8 +112,8 @@ if __name__=='__main__':
 ##    directoryLoad = '/Users/Ren/Dropbox/SourceCode/Test/Corsim/SourceData/'
 ##    directorySave = '/Users/Ren/Dropbox/SourceCode/Test/Corsim/MMPF/Result_occ/'
 
-    directoryLoad = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/'
-    directorySave = '/Users/Ren/Dropbox/SourceCode/test/MMPF/Result_occ/'
+    directoryLoad = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/CORSIM filter factor/'
+    directorySave = os.path.abspath(os.path.join(os.getcwd(), os.pardir, os.pardir))+'/test/MMPF/Result_occ/'
 
 
     densityTrue = load(directoryLoad+'TrueState/'+'TrueDensityL3B1F6000S65R50.npy')
@@ -207,149 +206,5 @@ if __name__=='__main__':
     plot_density(estimatedState, savefigure, str(PR)+'lag'+str(lag)+'estDen', directorySave)
     plot_parameter(estimatedModel, savefigure, str(PR)+'lag'+str(lag)+'EstModel', directorySave)
 #    plot_parameter(parameterTrue[0:180], savefigure, 'trueModelPlot', directorySave)
-
-##
-##    
-##
-##plot_density(DensityTrue[:,1:-1], savefigure, 'TrueDensityPlot'+'lag'+str(lag), directory)
-##plot_speed(SpeedTrue[:,1:-1], savefigure, 'TrueSpeedPlot', directory)
-##
-##plot_density(EstimatedDensity1st, savefigure, str(headway)+'lag'+str(lag)+'EstDen1st', directory)
-##plot_density(EstimatedDensity2nd, savefigure, str(headway)+'lag'+str(lag)+'EstDen2nd', directory)
-##plot_speed(EstimatedSpeed1st, savefigure, str(headway)+'lag'+str(lag)+'EstSpeed1st', directory)
-##plot_speed(EstimatedSpeed2nd, savefigure, str(headway)+'lag'+str(lag)+'EstSpeed2nd', directory)
-##plot_parameter(EstimatedModel1st, savefigure, str(headway)+'lag'+str(lag)+'EstModel1st', directory)
-##plot_parameter(EstimatedModel2nd, savefigure, str(headway)+'lag'+str(lag)+'EstModel2nd', directory)
-##plot_density(DensityError1st, savefigure, str(headway)+'lag'+str(lag)+'ErrDen1st', directory)
-##plot_density(DensityError2nd, savefigure, str(headway)+'lag'+str(lag)+'ErrDen2nd', directory)
-##plot_speed(SpeedError1st, savefigure, str(headway)+'lag'+str(lag)+'ErrSpeed1st', directory)
-##plot_speed(SpeedError2nd, savefigure, str(headway)+'lag'+str(lag)+'ErrSpeed2nd', directory)
-##
-##
-##
-
-
-
-#### Creat array to save results
-##    EstimatedDensity1st = zeros((timeStep,cellNumber))
-##    EstimatedDensity2nd = zeros((timeStep,cellNumber))
-##    EstimatedSpeed1st = zeros((timeStep,cellNumber))
-##    EstimatedSpeed2nd = zeros((timeStep,cellNumber))
-##    EstimatedModel1st = zeros((timeStep,cellNumber))
-##    EstimatedModel2nd = zeros((timeStep,cellNumber))
-##
-#### Initialization
-##
-### 1st model
-##    state_1st, model_1st = init_state_1st(DensityMea,cellNumber,laneNumber, sample)
-##    speed_1st = init_speed(sample, cellNumber)
-##    weight_1st = init_weight(sample)
-##    EstimatedDensity1st[0] = average(state_1st, axis=0)
-##    EstimatedSpeed1st[0] = average(speed_1st, axis=0)
-##    EstimatedModel1st[0] = laneNumber*ones(cellNumber)
-##
-### 2nd model
-##    state_2nd, model_2nd = init_state_2nd(DensityMea,cellNumber,laneNumber, sample) 
-##    speed_2nd = init_speed(sample, cellNumber)
-##    weight_2nd = init_weight(sample)
-##    EstimatedDensity2nd[0] = average(state_2nd[:,0,:], axis=0)
-##    EstimatedSpeed2nd[0] = average(speed_2nd, axis=0)
-##    EstimatedModel2nd[0] = laneNumber*ones(cellNumber)
-##    
-##
-#### Algorithm Start
-##    start_time = time.time()
-##    for counter in range(1,timeStep):
-##        print 'this is interation', counter
-##                
-##        if Smoother == False or (timeStep-counter)<5:
-##            lag = 1
-##        for i in range(lag):
-##
-#### Attach the boundary conditions
-##            lbc_2nd = left_boundary(laneNumber,DensityTrue, SpeedTrue, counter+i)
-##            rbc_2nd = right_boundary(laneNumber,DensityTrue, SpeedTrue, counter+i)
-##            lbc_1st = lbc_2nd[0],lbc_2nd[2]
-##            rbc_1st = rbc_2nd[0],rbc_2nd[2]
-##
-##            wl,wr = boundary_qq(lbc_2nd,rbc_2nd,rhoc1,rhoc2,rhom1,rhom2,Vmax,rhom_tuide, NewtonIteration)
-##            
-##            lbc_2nd = lbc_2nd[0], wl, lbc_2nd[2] 
-##            rbc_2nd = rbc_2nd[0], wr, rbc_2nd[2]
-##
-##
-#### regime transition
-##            model_1st = regime_transition(model_1st, sample, ptran, laneNumber, cellNumber)
-##            model_2nd = regime_transition(model_2nd, sample, ptran, laneNumber, cellNumber)
-##
-##            for j in range(int(sample)):
-##
-##                state_1st[j] = ctm_qq(state_1st[j],model_1st[j], Lambda, lbc_1st, rbc_1st, rhoc, rhom, Vmax, rhom_tuide,ModelNoiseMean, ModelNoiseStd)
-##                speed_1st[j] = vel_qq(state_1st[j], model_1st[j]*rhoc,model_1st[j]*rhom,Vmax,model_1st[j]*rhom_tuide)
-##
-##                state_2nd[j] = ctm_qq_2nd(state_2nd[j], model_2nd[j],Lambda, lbc_2nd, rbc_2nd, rhoc1, rhoc2, rhom1, rhom2, Vmax, rhom_tuide,ModelNoiseMean, ModelNoiseStd)
-##                speed_2nd[j] = vel_qq(state_2nd[j,0], model_2nd[j]*(rhoc1*rhoc2/(state_2nd[j,1]*rhoc2+(1-state_2nd[j,1])*rhoc1)), model_2nd[j]*(rhom1*rhom2/(state_2nd[j,1]*rhom2+(1-state_2nd[j,1])*rhom1)), Vmax, model_2nd[j]*rhom_tuide)
-##
-##            if i == 0:
-##
-##                state_1st_copy = state_1st.copy()
-##                model_1st_copy = model_1st.copy()
-##
-##                state_2nd_copy = state_2nd.copy()
-##                model_2nd_copy = model_2nd.copy()
-##
-##            likelihood_1st = compute_normalize_particle_likelihood(state_1st, speed_1st, zeros(cellNumber), SpeedMea[counter+i], sample, cellNumber, DensityMeaMean, SpeedMeaMean, DensityMeaStd, SpeedMeaStd)
-##            likelihood_2nd = compute_normalize_particle_likelihood(state_2nd[:,0,:], speed_2nd, zeros(cellNumber), SpeedMea[counter+i], sample, cellNumber, DensityMeaMean, SpeedMeaMean, DensityMeaStd, SpeedMeaStd)
-##
-##            weight_1st = update_weight(likelihood_1st, weight_1st)
-##            weight_2nd = update_weight(likelihood_2nd, weight_2nd)
-##
-##        state_1st, model_1st = resampling(state_1st_copy,model_1st_copy, sample, cellNumber, weight_1st)
-##        state_2nd, model_2nd = resampling(state_2nd_copy, model_2nd_copy, sample, cellNumber, weight_2nd)
-##
-##        weight_1st = init_weight(sample)
-##        weight_2nd = init_weight(sample)
-##
-##        EstimatedDensity1st[counter] = average(state_1st, axis=0)
-##        EstimatedDensity2nd[counter] = average(state_2nd[:,0,:], axis=0)
-##        EstimatedSpeed1st[counter] = average(speed_1st, axis=0)
-##        EstimatedSpeed2nd[counter] = average(speed_2nd, axis=0)
-##        EstimatedModel1st[counter] = average(model_1st, axis=0)
-##        EstimatedModel2nd[counter] = average(model_2nd, axis=0)
-##
-##        print 'model prob for 1st model is:', average(model_1st, axis=0)
-##        print 'model prob for 2nd model is:', average(model_2nd, axis=0)
-##
-##    DensityError1st = EstimatedDensity1st-DensityTrue[:,1:-1]
-##    DensityError2nd = EstimatedDensity2nd-DensityTrue[:,1:-1]
-##    SpeedError1st = EstimatedSpeed1st-SpeedTrue[:,1:-1]
-##    SpeedError2nd = EstimatedSpeed2nd-SpeedTrue[:,1:-1]
-##
-##    print "run time is", time.time() - start_time
-##    print 'density error is', average(abs(DensityError2nd))
-##
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstDen1st',EstimatedDensity1st)
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstDen2nd',EstimatedDensity2nd)
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstSpeed1st',EstimatedSpeed1st)
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstSpeed2nd',EstimatedSpeed2nd)
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstModel1st',EstimatedModel1st)
-##    save( directory +'MMPF/' +'Result/' + str(headway)+'lag'+str(lag)+'EstModel2nd',EstimatedModel2nd)
-##
-##
-##
-##plot_density(DensityTrue[:,1:-1], savefigure, 'TrueDensityPlot', directory)
-##plot_speed(SpeedTrue[:,1:-1], savefigure, 'TrueSpeedPlot', directory)
-##
-##plot_density(EstimatedDensity1st, savefigure, str(headway)+'lag'+str(lag)+'EstDen1st', directory)
-##plot_density(EstimatedDensity2nd, savefigure, str(headway)+'lag'+str(lag)+'EstDen2nd', directory)
-##plot_speed(EstimatedSpeed1st, savefigure, str(headway)+'lag'+str(lag)+'EstSpeed1st', directory)
-##plot_speed(EstimatedSpeed2nd, savefigure, str(headway)+'lag'+str(lag)+'EstSpeed2nd', directory)
-##plot_parameter(EstimatedModel1st, savefigure, str(headway)+'lag'+str(lag)+'EstModel1st', directory)
-##plot_parameter(EstimatedModel2nd, savefigure, str(headway)+'lag'+str(lag)+'EstModel2nd', directory)
-##plot_density(DensityError1st, savefigure, str(headway)+'lag'+str(lag)+'ErrDen1st', directory)
-##plot_density(DensityError2nd, savefigure, str(headway)+'lag'+str(lag)+'ErrDen2nd', directory)
-##plot_speed(SpeedError1st, savefigure, str(headway)+'lag'+str(lag)+'ErrSpeed1st', directory)
-##plot_speed(SpeedError2nd, savefigure, str(headway)+'lag'+str(lag)+'ErrSpeed2nd', directory)
-##
 
 

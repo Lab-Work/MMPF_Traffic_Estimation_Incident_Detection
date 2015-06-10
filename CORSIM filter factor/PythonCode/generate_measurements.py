@@ -6,7 +6,8 @@ from numpy import *
 from random import choice
 from random import sample
 from copy import deepcopy
-
+import sys
+import os
 
 def build_veh_trajectory(keyData):
 ## construct the vehicle trajectory dictionary
@@ -119,11 +120,13 @@ def plot(cellDensity, cellSpeed, saveDirectory, fileName):
 
 if __name__=='__main__':
 
-        ## the directory to load the extracted keyData
-        loadDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/ExtractedKeyData/'
-        ## the directory to store the true state
-        saveDirectory = '/Users/Ren/Dropbox/SourceCode/CORSIM filter factor/Measurements/'       
-                
+
+
+        loadDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'/ExtractedKeyData/'
+        ## the directory where the output from this function will be saved at
+        saveDirectory = os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'/Measurements/'  
+
+
 
         fileList = ['L3B1F5000S65R50', 'L3B1F4000S65R50', 'L3B1F3000S65R50', 'L3B1F2000S65R50', 'L3B1F1000S65R50']
 ##        fileList = ['L3B1F6000S65R50']
